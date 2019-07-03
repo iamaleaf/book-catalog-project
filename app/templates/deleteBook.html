@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card text-center">
+    <div class="card-header">
+        <strong>{{ book.name }}</strong>
+    </div>
+    <div class="card-body">
+        <p class="card-text">Are you sure you want to delete this book?</p>
+        <form action="{{ url_for('deleteBook', category_id=category_id, book_id=book.id) }}" method="POST">
+            <p class="card-links">
+                <a href="{{ url_for('showBook', category_id=book.category_id, book_id=book.id)}}" class="card-link btn btn-success">Cancel</a>
+                <button type="submit" class="card-link btn btn-danger" id="submit">Delete</button>
+            </p>
+        </form>
+    </div>
+    <div class="card-footer">
+        <small class="text-muted"><strong>Category:</strong> {{ book.category.name }}</small>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required bootstrap meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <!-- Custom CSS -->
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+        <title>Book Catalog</title>
+
+        <!-- For additional head in child templates -->
+        {% block head %}{% endblock %}
+    </head>
+    <body>
+        
+        <div class="container">
+
+            <!-- Header -->
+            <div class=header>
+                <a href="{{ url_for('showCatalog') }}"><h1 id="header-title">Book Catalog</h1></a>
+                {% if user == None or not user %}
+                    <!-- Sign in button -->
+                    <a class="btn btn-primary" id="login-button" href="{{ url_for('showLogin') }}" role="button">Login</a>                
+                {% else %}
+                    <a class="btn btn-primary" id="login-button" href="{{ url_for('gdisconnect') }}" role="button">Logout</a>     
+                {% endif %}
+                
+            </div>
+
+            <!-- Navigation -->
+            <div>
+                <hr>
+                <ul class="nav justify-content-center">
+                    {% for category in categories %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('showCategory', category_id=category.id )}}">{{ category.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <hr>
+            <!-- flashed messages -->
+            <div class="flash">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                    <li><strong>{{ message }}</strong></li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endwith %}
+            </div>
+            <div >
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </body>
+</html>

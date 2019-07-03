@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if user != None %}
+    <p class="add-book"><a class="btn btn-primary add-button" href="{{ url_for('newBook', category_id=category.id) }}" role="button">Add Book</a></p>
+    {% endif %}
+
+   
+    <div class="card mx-auto" style="width: 75%;">
+        <div class="card-header">
+            <strong>{{ category.name }} Books</strong>
+        </div>
+        <ul class="list-group list-group-flush">
+            {% for book in books %}
+            <li class="list-group-item"><a href="{{ url_for('showBook', category_id=category.id, book_id=book.id) }}">{{ loop.index }} - {{ book.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    
+{% endblock %}

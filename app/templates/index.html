@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card mx-auto" style="width: 75%;">
+    <div class="card-header">
+        <strong>Latest Items</strong>
+    </div>
+    <ul class="list-group list-group-flush">
+        {% for book in books %}
+        <li class="list-group-item"><a href="{{ url_for('showBook', category_id=book.category_id, book_id=book.id) }}">{{ book.name }} - <small class="text-muted">{{ book.category.name }}</small></a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

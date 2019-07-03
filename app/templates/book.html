@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card" style="width: 75%;">
+        <div class="card-body">
+        <h5 class="card-title">{{ book.name }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{ book.author }}</h6>
+        <hr>
+        <p class="card-text">{{ book.description}}</p>
+        {% if owner %}
+            <hr>
+            <p class="card-links">
+                <a href="{{ url_for('editBook', category_id=book.category_id, book_id=book.id)}}" class="card-link btn btn-success">Edit</a>
+                <a href="{{ url_for('deleteBook', category_id=book.category_id, book_id=book.id)}}" class="card-link btn btn-danger">Delete</a>
+            </p>
+        {% endif %}
+    </div>
+    <div class="card-footer">
+        <small class="text-muted"><strong>Category:</strong> {{ book.category.name }}</small>
+    </div>
+</div>
+
+{% endblock %}
